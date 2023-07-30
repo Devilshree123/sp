@@ -1,0 +1,15 @@
+Dating App 
+
+Pages:
+    1. SignUp
+    2. Login 
+
+SignUp:
+    1. Name 
+    2. Email 
+    3. Password
+    4. ConfirmPassword
+
+LoginData:
+    1. Email 
+    2. Password
