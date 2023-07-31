@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import toast, {Toaster} from "react-hot-toast";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -18,9 +19,19 @@ export default function SignupPage() {
         try {
             setLoading(true);
             const response = await axios.post("/api/signup", user);
-            console.log("Signup success", response.data);
-            router.push("/login");
+            if(response.data.success == true) {
+                console.log("Signup success", response.data);
+                const interval = setInterval(() => {
+                    router.push("/login");
+                }, 2000);
+                toast.success("Signup successful")
+                
+            }else{
+                toast.error(response.data.message)
+                console.log("Please enter valid credentials")
+            }
         } catch (error: any) {
+            console.log("Signup Failed", error);
             console.log("Signup failed", error.message);
         } finally {
             setLoading(false);
@@ -41,6 +52,7 @@ export default function SignupPage() {
 
     return (
         <div className="flex flex-col space-y-4 items-center justify-center min-h-screen py-2">
+            <div><Toaster/></div>
             <h1 className=" mb-4 text-4xl font-extrabold leading-none tracking-tight text-red-600 md:text-5xl lg:text-4xl ">
                 Signup
             </h1>
