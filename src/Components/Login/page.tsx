@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, {useEffect} from 'react'
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import toast, {Toaster} from "react-hot-toast";
 
 function LoginPage() {
     const router = useRouter();
@@ -18,13 +19,24 @@ function LoginPage() {
     const onLogin = async () => {
         try {
             setLoading(true);
-            const response = await axios.post("/api/users/login", user);
-            console.log("Login success", response.data);
-           
-            router.push("/profile");
+            const response = await axios.post("/api/login", user);
+            
+            console.log(response.data)
+            if(response.data.success == true) {
+                console.log("Login success", response.data);
+                const interval = setInterval(() => {
+                    router.push("/profile");
+                }, 2000);
+                toast.success("Login successful")
+                
+            }else{
+                toast.error(response.data.message)
+                console.log("Please enter valid credentials")
+            }
+            
         } catch (error:any) {
             console.log("Login failed", error);
-          
+            toast.error(error.message)
         } finally{
         setLoading(false);
         }
@@ -41,6 +53,7 @@ function LoginPage() {
 
   return (
     <div className="flex flex-col space-y-4 items-center justify-center min-h-screen py-2">
+        <div><Toaster/></div>
         <h1  className=" mb-4 text-4xl font-extrabold leading-none tracking-tight text-red-600 md:text-5xl lg:text-4xl">Login</h1>
         <hr />
         
