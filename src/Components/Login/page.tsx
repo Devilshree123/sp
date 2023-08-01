@@ -1,11 +1,5 @@
 "use client"
-import {
-    Input,
-    Ripple,
-    initTE,
-  } from "tw-elements";
-  
-  initTE({ Input, Ripple });
+
 import React ,{useEffect} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
@@ -57,6 +51,7 @@ function LoginPage() {
 
 
   return (
+
  <>
   <section className="h-screen">
   <div className="container h-full px-6 py-24">
@@ -73,6 +68,8 @@ function LoginPage() {
       
       <div className="flex flex-col space-y-4 md:w-8/12 lg:ml-6 lg:w-5/12">
         <form>
+=======
+   
         
         
          
