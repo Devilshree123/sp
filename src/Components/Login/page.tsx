@@ -24,11 +24,8 @@ function LoginPage() {
             console.log(response.data)
             if(response.data.success == true) {
                 console.log("Login success", response.data);
-                const interval = setInterval(() => {
-                    router.push("/profile");
-                }, 2000);
                 toast.success("Login successful")
-                
+                router.push("/profile");
             }else{
                 toast.error(response.data.message)
                 console.log("Please enter valid credentials")

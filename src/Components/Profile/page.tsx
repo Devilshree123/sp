@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import toast, {Toaster} from "react-hot-toast";
 
-const profilePage = () => {
+const ProfilePage = () => {
 
   const router = useRouter()
 
@@ -12,9 +12,7 @@ const profilePage = () => {
     try {
       await axios.get('/api/logout')
       toast.success('Logout successful')
-      setInterval(() => {
-        router.push('/login')
-      },2000)
+      router.push('/login')
     } catch (error: any) {
       toast.error(error.message)
       console.log(error.message)
@@ -30,4 +28,4 @@ const profilePage = () => {
   )
 }
 
-export default profilePage
+export default ProfilePage
